@@ -1,6 +1,6 @@
 resource "tfe_organization" "arpanrec" {
   name                     = "arpanrec"
-  email                    = "arpan.rec@outlook.com"
+  email                    = "me@arpanrec.me"
   collaborator_auth_policy = "two_factor_mandatory"
 }
 
