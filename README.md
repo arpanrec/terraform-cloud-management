@@ -36,6 +36,7 @@ Make sure the [Terraform Binary](https://www.terraform.io/downloads) is in your 
 ```shell
 terraform login
 ```
+
 or
 populate `$HOME/.terraform.d/credentials.tfrc.json`
 
@@ -49,23 +50,24 @@ populate `$HOME/.terraform.d/credentials.tfrc.json`
 }
 ```
 
-### Initialize the Terraform workspace with `terraform init`.
+### Initialize the Terraform workspace with `terraform init`
 
 ```shell
 terraform init
 ```
 
-### Make changes and plan the changes with `terraform plan`.
+### Make changes and plan the changes with `terraform plan`
 
 ```shell
 terraform plan -input=false -var-file=".secret.all.json" -out="./tfplan"
 ```
 
-### Apply the changes with `terraform apply`.
+### Apply the changes with `terraform apply`
 
 ```shell
 terraform apply "./tfplan"
 ```
 
 ## TODO
+
 GitHub Actions secrets `TF_API_TOKEN` for [github-repo-management](https://github.com/arpanrec/terraform-cloud-management) is added manually. This should be pulled from vault.
