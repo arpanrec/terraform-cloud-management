@@ -4,6 +4,8 @@
 
 [Terraform](https://www.terraform.io) Project for managing [Terraform Cloud](https://app.terraform.io/app/arpanrec/workspaces)
 
+Prerequisite: Create terraform cloud organization [arpanrec](./vars_arpanrec_tf_cloud_oraganization.tf) [Creating Organization via terraform is only available for Terraform Cloud Enterprise]
+
 ## Workflow and Configuration
 
 ## Phase 1: Local Run
@@ -51,7 +53,7 @@ terraform apply "./tfplan"
 
 ### @ Backend
 
-Make sure the backend is organization (arpanrec) and workspace (terraform-cloud-management) is already created.
+Prerequisite: Make sure the backend is organization (arpanrec) and workspace (terraform-cloud-management) is already created.
 
 Current backend is stored at `./backend_config.tf`
 
