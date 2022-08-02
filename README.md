@@ -82,4 +82,4 @@ This allows GitHub Actions to communicate with [Terraform Cloud](https://app.ter
 
 #### TODO: GitHub CICD
 
-GitHub Actions secrets `TF_API_TOKEN` for [github-repo-management](https://github.com/arpanrec/terraform-cloud-management) is added manually. This should be pulled from vault.
+GitHub Actions secrets `TF_PROD_TOKEN` for [github-repo-management](https://github.com/arpanrec/terraform-cloud-management) is added manually. This should be pulled from vault.
