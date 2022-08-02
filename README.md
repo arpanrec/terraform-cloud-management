@@ -6,28 +6,7 @@
 
 ## Workflow and Configuration
 
-### @ Backend
-
-Current backend is stored at `./backend_config.tf`
-
-```hcl
-terraform {
-  backend "remote" {
-    organization = "arpanrec"
-    workspaces {
-      name = "terraform-cloud-management"
-    }
-  }
-}
-```
-
-### @ GitHub
-
-* Actions: Trigger Push on Main Branch, [Terraform Actions](.github/workflows/terraform.yml)
-* Access token to app.terraform.io is stored in GitHub Actions secrets `TF_API_TOKEN` in `production` environment.
-This allows GitHub Actions to communicate with [Terraform Cloud](https://app.terraform.io/app/arpanrec/workspaces/terraform-cloud-management).
-
-## Local Run
+## Phase 1: Local Run
 
 Make sure the [Terraform Binary](https://www.terraform.io/downloads) is in your PATH.
 
@@ -38,7 +17,7 @@ terraform login
 ```
 
 or
-populate `$HOME/.terraform.d/credentials.tfrc.json`
+populate `${HOME}/.terraform.d/credentials.tfrc.json`
 
 ```json
 {
@@ -59,7 +38,7 @@ terraform init
 ### Make changes and plan the changes with `terraform plan`
 
 ```shell
-terraform plan -input=false -var-file=".secret.all.json" -out="./tfplan"
+terraform plan -input=false -out="./tfplan"
 ```
 
 ### Apply the changes with `terraform apply`
@@ -68,6 +47,39 @@ terraform plan -input=false -var-file=".secret.all.json" -out="./tfplan"
 terraform apply "./tfplan"
 ```
 
-## TODO
+## Phase 2: Cloud Migration
+
+### @ Backend
+
+Make sure the backend is organization (arpanrec) and workspace (terraform-cloud-management) is already created.
+
+Current backend is stored at `./backend_config.tf`
+
+```hcl
+terraform {
+  backend "remote" {
+    organization = "arpanrec"
+    workspaces {
+      name = "terraform-cloud-management"
+    }
+  }
+}
+```
+
+(Run Once) Migrate the state from local to cloud `terraform init -migrate-state`
+
+```shell
+terraform init -migrate-state # Run Once
+```
+
+## CICD
+
+### @ GitHub
+
+* Actions: Trigger Push on Main Branch, [Terraform Actions](.github/workflows/terraform.yml)
+* Access token to app.terraform.io is stored in GitHub Actions secrets `TF_API_TOKEN` in `production` environment.
+This allows GitHub Actions to communicate with [Terraform Cloud](https://app.terraform.io/app/arpanrec/workspaces/terraform-cloud-management).
+
+#### TODO: GitHub CICD
 
 GitHub Actions secrets `TF_API_TOKEN` for [github-repo-management](https://github.com/arpanrec/terraform-cloud-management) is added manually. This should be pulled from vault.
